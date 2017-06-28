@@ -5,17 +5,18 @@ describe('new Envie({}, {})', () => {
   const envie = Envie({}, {
     defined: 8
   })
-  describe('.get(key)', () => {
+  describe('.has(key)', () => {
     describe('when the key is not set up', () => {
-      it('returns undefined', () => {
-        expect(envie.get('not_defined')).to.equal(undefined)
+      it('returns false', () => {
+        expect(envie.has('not_defined')).to.equal(false)
       })
     })
 
     describe('when the key is set up', () => {
-      it('returns the raw value', () => {
-        expect(envie.get('defined')).to.equal(8)
+      it('returns true', () => {
+        expect(envie.has('defined')).to.equal(true)
       })
     })
   })
 })
+
