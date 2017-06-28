@@ -1,0 +1,28 @@
+{
+  "name": "envie",
+  "version": "1.0.0-pre",
+  "description": "Tiny module to read and document environment configuration",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover --print detail _mocha -- -R spec test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Floby/node-envie.git"
+  },
+  "keywords": [
+    "12-Factor",
+    "12",
+    "Factor",
+    "Cloud",
+    "Configuration",
+    "Environment",
+    "Validator"
+  ],
+  "author": "Florent Jaby <florent.jaby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Floby/node-envie/issues"
+  },
+  "homepage": "https://github.com/Floby/node-envie#readme"
+}
