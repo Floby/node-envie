@@ -54,13 +54,13 @@ envie.displayHelp()
 ```
 
 ```
-	PORT (number)
+  PORT (number)
     Port on which the HTTP server will listen
 
-	LOG_LEVEL (string, default: debug)
+  LOG_LEVEL (string, default: debug)
     Level of verbosity for the logs
 
-	DATABASE_URL (string <uri:postgres|mysql|sqlite>)
+  DATABASE_URL (string <uri:postgres|mysql|sqlite>)
     Connection string of the main database
 
 ```
