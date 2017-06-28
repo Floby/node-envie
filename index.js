@@ -1,6 +1,8 @@
 const Joi = require('joi')
 
 module.exports = Envie
+Envie.Envie = Envie
+Envie.Joi = Joi
 
 function Envie (description, values) {
   if (!(this instanceof Envie)) return new Envie(description, values)
