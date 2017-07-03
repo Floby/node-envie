@@ -31,6 +31,7 @@ function Envie (description, values) {
     Object.keys(description)
       .map((key) => Descriptor.description(key, description[key], values[key]))
       .forEach((description) => result.write(description))
+    result.end()
     return result.pipe(target)
   }
 
