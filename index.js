@@ -1,3 +1,5 @@
+const SS = require('stream-stream')
+const Descriptor = require('./lib/descriptor')
 const Joi = require('joi')
 
 module.exports = Envie
@@ -6,6 +8,7 @@ Envie.Joi = Joi
 
 function Envie (description, values) {
   if (!(this instanceof Envie)) return new Envie(description, values)
+  if (!values) values = process.env
 
   this.get = function (key) {
     const { error, value } = validate(key)
@@ -22,8 +25,20 @@ function Envie (description, values) {
 
   this.validate = () => true
 
+  this.displayHelp = function (target) {
+    if (!target) target = process.stderr
+    const result = SS({ separator: '\n' })
+    Object.keys(description)
+      .map((key) => Descriptor.description(key, description[key], values[key]))
+      .forEach((description) => result.write(description))
+    return result.pipe(target)
+  }
+
   function validate (key) {
-    const validator = description[key] || Joi.any()
-    return validator.validate(values[key])
+    return getValidator(key).validate(values[key])
+  }
+
+  function getValidator (key) {
+    return description[key] || Joi.any()
   }
 }

@@ -29,6 +29,11 @@
     "chai": "^4.0.2",
     "joi": "^10.6.0",
     "mocha": "^3.4.2",
-    "sinon": "^2.3.5"
+    "sinon": "^2.3.6",
+    "stream-sink": "^2.1.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "stream-stream": "^1.2.6"
   }
 }
