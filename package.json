@@ -4,7 +4,8 @@
   "description": "Tiny module to read and document environment configuration",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover --print detail _mocha -- -R spec test"
+    "test": "istanbul cover --print detail _mocha -- -R spec test",
+    "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "homepage": "https://github.com/Floby/node-envie#readme",
   "devDependencies": {
     "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
     "joi": "^10.6.0",
     "mocha": "^3.4.2",
     "sinon": "^2.3.6",
