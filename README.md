@@ -42,12 +42,12 @@ const envie = Envie({
 
 // When you need to access your configuration
 server.listen(envie.get('PORT'))
-DatabaseService.use('envie.get('DATABASE_URL')')
+DatabaseService.use(envie.get('DATABASE_URL'))
 ```
 
 Undescribed keys can be requested as well but will not be validated.
 
-You can also display a nicely formatted help output
+You can also display a nicely formatted help output with colours
 
 ```javascript
 envie.displayHelp()
@@ -64,6 +64,24 @@ envie.displayHelp()
     Connection string of the main database
 
 ```
+
+The displayed message also accounts for current values. For example
+with `PORT=8080` and `LOG_LEVEL="hello world!"`
+
+```
+  PORT (number)
+    Port on which the HTTP server will listen
+    overwritten: 8080
+
+  LOG_LEVEL (string, default: debug)
+    Level of verbosity for the logs
+    overwritten: invalid! "LOG_LEVEL" must be one of [fatal, error, warn, info, debug, trace]
+
+  DATABASE_URL (string <uri:postgres|mysql|sqlite>)
+    Connection string of the main database
+
+```
+
 
 Reference
 ---------
