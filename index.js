@@ -23,8 +23,6 @@ function Envie (description, values) {
     return error ? false : values.hasOwnProperty(key)
   }
 
-  this.validate = () => true
-
   this.displayHelp = function (target) {
     if (!target) target = process.stderr
     const result = SS({ separator: '\n' })
@@ -33,6 +31,11 @@ function Envie (description, values) {
       .forEach((description) => result.write(description))
     result.end()
     return result.pipe(target)
+  }
+
+  this.validate = () => {
+    const { error } = Joi.validate(values, description, { allowUnknown: true })
+    if (error) throw error
   }
 
   function validate (key) {

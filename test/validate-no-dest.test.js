@@ -1,3 +1,4 @@
+const Joi = require('joi')
 const Envie = require('../')
 const { expect } = require('chai')
 
@@ -6,9 +7,33 @@ describe('new Envie({}, {})', () => {
     defined: 8
   })
   describe('.validate()', () => {
-    it('returns true', () => {
-      expect(envie.validate()).to.equal(true)
+    it('does not throw', () => {
+      expect(() => envie.validate()).not.to.throw()
     })
   })
 })
 
+describe('new Envie(schema, values)', () => {
+  const envie = Envie({
+    key: Joi.number()
+  }, {
+    key: 8
+  })
+  describe('.validate()', () => {
+    context('with valid data', () => {
+      it('does not throw', () => {
+        expect(() => envie.validate()).not.to.throw()
+      })
+    })
+    context('with valid data', () => {
+      const envie = Envie({
+        key: Joi.number()
+      }, {
+        key: 'hello'
+      })
+      it('throws', () => {
+        expect(() => envie.validate()).to.throw()
+      })
+    })
+  })
+})
