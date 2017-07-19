@@ -40,12 +40,12 @@ const envie = Envie({
 })
 
 
-```
+// When you need to access your configuration
 server.listen(envie.get('PORT'))
 DatabaseService.use('envie.get('DATABASE_URL')')
+```
 
 Undescribed keys can be requested as well but will not be validated.
-
 
 You can also display a nicely formatted help output
 
