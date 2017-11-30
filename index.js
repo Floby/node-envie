@@ -43,6 +43,20 @@ function Envie (description, values) {
   }
 
   function getValidator (key) {
-    return description[key] || Joi.any()
+    const keyDescription = description[key]
+    if (keyDescription && keyDescription.isJoi) {
+      return keyDescription
+    }
+    const keyValue = keyDescription
+
+    if (typeof keyValue === 'number') {
+      return Joi.number().default(keyValue)
+    } else if (typeof keyValue === 'boolean') {
+      return Joi.boolean().default(keyValue)
+    } else if (typeof keyValue === 'string' && !/\s/.test(keyValue)) {
+      return Joi.string().default(keyValue)
+    } else {
+      return Joi.any()
+    }
   }
 }
