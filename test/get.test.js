@@ -25,6 +25,13 @@ describe('new Envie({descriptions...}, {...values})', () => {
         it('returns the default value', () => {
           expect(envie.get('with_default')).to.equal('hello world')
         })
+
+        describe('but noDefaults option is true', () => {
+          const envie = Envie(description, {}, { noDefaults: true })
+          it('returns undefined', () => {
+            expect(envie.get('with_default')).to.equal(undefined)
+          })
+        })
       })
     })
 
@@ -45,6 +52,7 @@ describe('new Envie({descriptions...}, {...values})', () => {
         expect(() => envie.get('invalid')).to.throw(/invalid is not valid/i)
       })
     })
+
   })
 })
 

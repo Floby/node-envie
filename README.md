@@ -92,11 +92,15 @@ const help = envier.helpString()
 Reference
 ---------
 
-#### `[new] Envie(description[, values=process.env])`
+#### `[new] Envie(description[, values=process.env], options={ noDefaults: false })`
 
 Creates a new `envie` instance which parses the keys of the object `values` using the `description`.
 `description` must be an object whose keys contain a [Joi](https://www.npmjs.com/package/joi) validator.
 By default, `process.env` is parsed. The `new` keyword is optional.
+
+You can specifiy `noDefaults` to true to get `undefined` instead of default value for non set key.
+This is specially useful if you want to use default values on local environment but want to ensure all required keys
+have a defined values when application is deployed.
 
 #### `envie.get(key)`
 
