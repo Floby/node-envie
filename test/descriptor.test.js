@@ -8,22 +8,17 @@ describe('Descriptor.description(name, validator, value)', () => {
   const description = Descriptor.description
   const name = 'MY_KEY'
 
-  it('returns a readable stream', () => {
-    return description(name, Joi.any()).pipe(sink()).then((desc) => {
-      expect(desc).to.be.a('string')
-    })
+  it('returns a string', () => {
+    const actual = description(name, Joi.any())
+    expect(actual).to.be.a('string')
   })
 
   describe('when the validator is .any()', () => {
     const desc = Joi.any()
     describe('the first line', () => {
       it('contains the name with colours', () => {
-        return description(name, desc)
-          .pipe(sink())
-          .then(getLine(0))
-          .then((line) => {
-            expect(line).to.equal(`  ${name.bold.cyan}`)
-          })
+        const lines = split(description(name, desc))
+        expect(lines[0]).to.equal(`  ${name.bold.cyan}`)
       })
     })
     describe('with a description', () => {
@@ -31,23 +26,15 @@ describe('Descriptor.description(name, validator, value)', () => {
       const desc = Joi.any().description(text)
       describe('the first line', () => {
         it('contains the name with colours', () => {
-          return description(name, desc)
-            .pipe(sink())
-            .then(getLine(0))
-            .then((line) => {
-              expect(line).to.equal(`  ${name.bold.cyan}`)
-            })
+          const lines = split(description(name, desc))
+          expect(lines[0]).to.equal(`  ${name.bold.cyan}`)
         })
       })
 
       describe('the second line', () => {
         it('contains the human readable description', () => {
-          return description(name, desc)
-            .pipe(sink())
-            .then(getLine(1))
-            .then((line) => {
-              expect(line).to.equal(`    ${text}`)
-            })
+          const lines = split(description(name, desc))
+          expect(lines[1]).to.equal(`    ${text}`)
         })
       })
     })
@@ -57,12 +44,8 @@ describe('Descriptor.description(name, validator, value)', () => {
     const desc = Joi.number().default(8)
     describe('the first line', () => {
       it('contains the default value after the type', () => {
-        return description(name, desc)
-          .pipe(sink())
-          .then(getLine(0))
-          .then((line) => {
-            expect(line).to.equal(`  ${name.bold.cyan} (${'number'.italic}), default: ${'8'.gray}`)
-          })
+        const lines = split(description(name, desc))
+        expect(lines[0]).to.equal(`  ${name.bold.cyan} (${'number'.italic}), default: ${'8'.gray}`)
       })
     })
   })
@@ -71,12 +54,8 @@ describe('Descriptor.description(name, validator, value)', () => {
     const desc = Joi.string()
     describe('the first line', () => {
       it('contains the name and type with colours', () => {
-        return description(name, desc)
-          .pipe(sink())
-          .then(getLine(0))
-          .then((line) => {
-            expect(line).to.equal(`  ${name.bold.cyan} (${'string'.italic})`)
-          })
+        const lines = split(description(name, desc))
+        expect(lines[0]).to.equal(`  ${name.bold.cyan} (${'string'.italic})`)
       })
     })
 
@@ -85,12 +64,8 @@ describe('Descriptor.description(name, validator, value)', () => {
         const desc = Joi.string().uri()
         describe('the first line', () => {
           it('contains the name and type with colours', () => {
-            return description(name, desc)
-              .pipe(sink())
-              .then(getLine(0))
-              .then((line) => {
-                expect(line).to.equal(`  ${name.bold.cyan} (${'uri'.italic})`)
-              })
+            const lines = split(description(name, desc))
+            expect(lines[0]).to.equal(`  ${name.bold.cyan} (${'uri'.italic})`)
           })
         })
       })
@@ -98,12 +73,8 @@ describe('Descriptor.description(name, validator, value)', () => {
         const desc = Joi.string().uri({ scheme: 'http' })
         describe('the first line', () => {
           it('contains the name, type and declinations with colours', () => {
-            return description(name, desc)
-              .pipe(sink())
-              .then(getLine(0))
-              .then((line) => {
-                expect(line).to.equal(`  ${name.bold.cyan} (${'uri <http>'.italic})`)
-              })
+            const lines = split(description(name, desc))
+            expect(lines[0]).to.equal(`  ${name.bold.cyan} (${'uri <http>'.italic})`)
           })
         })
       })
@@ -111,12 +82,8 @@ describe('Descriptor.description(name, validator, value)', () => {
         const desc = Joi.string().uri({ scheme: ['http', 'https'] }).uri({ scheme: 'ftp' })
         describe('the first line', () => {
           it('contains the name, type and declinations with colours', () => {
-            return description(name, desc)
-              .pipe(sink())
-              .then(getLine(0))
-              .then((line) => {
-                expect(line).to.equal(`  ${name.bold.cyan} (${'uri <http|https|ftp>'.italic})`)
-              })
+            const lines = split(description(name, desc))
+            expect(lines[0]).to.equal(`  ${name.bold.cyan} (${'uri <http|https|ftp>'.italic})`)
           })
         })
       })
@@ -130,12 +97,8 @@ describe('Descriptor.description(name, validator, value)', () => {
       describe('and no description', () => {
         describe('the second line', () => {
           it('contains the overloaded value', () => {
-            return description(name, desc, value)
-              .pipe(sink())
-              .then(getLine(1))
-              .then((line) => {
-                expect(line).to.equal(`    overwritten: ${value.bold.green}`)
-              })
+            const lines = split(description(name, desc, value))
+            expect(lines[1]).to.equal(`    overwritten: ${value.bold.green}`)
           })
         })
       })
@@ -143,12 +106,8 @@ describe('Descriptor.description(name, validator, value)', () => {
         const desc = Joi.string().default('World').description('something')
         describe('the third line', () => {
           it('contains the overloaded value', () => {
-            return description(name, desc, value)
-              .pipe(sink())
-              .then(getLine(2))
-              .then((line) => {
-                expect(line).to.equal(`    overwritten: ${value.bold.green}`)
-              })
+            const lines = split(description(name, desc, value))
+            expect(lines[2]).to.equal(`    overwritten: ${value.bold.green}`)
           })
         })
       })
@@ -158,11 +117,8 @@ describe('Descriptor.description(name, validator, value)', () => {
       const value = "World"
       describe('the description', () => {
         it('does not mention it', () => {
-          return description(name, desc, value)
-            .pipe(sink())
-            .then((text) => {
-              expect(text.split('\n')).to.have.length(2)
-            })
+          const lines = split(description(name, desc, value))
+          expect(lines).to.have.length(2)
         })
       })
     })
@@ -171,11 +127,8 @@ describe('Descriptor.description(name, validator, value)', () => {
       let value
       describe('the description', () => {
         it('does not mention it', () => {
-          return description(name, desc, value)
-            .pipe(sink())
-            .then((text) => {
-              expect(text).not.to.contain(value)
-            })
+          const lines = split(description(name, desc, value))
+          expect(lines).not.to.contain(value)
         })
       })
     })
@@ -185,20 +138,14 @@ describe('Descriptor.description(name, validator, value)', () => {
       let value = 'hello'
       describe('the value line', () => {
         it('explains the validation error', () => {
-          return description(name, desc, value)
-            .pipe(sink())
-            .then(getLine(1))
-            .then((line) => {
-              expect(line).to.equal(`    overwritten: ` + `invalid! "${name}" must be a number`.red)
-            })
+          const lines = split(description(name, desc, value))
+          expect(lines[1]).to.equal(`    overwritten: ` + `invalid! "${name}" must be a number`.red)
         })
       })
     })
   })
 })
 
-function getLine (index) {
-  return function (text) {
-    return String(text.split('\n')[index])
-  }
+function split (text) {
+  return text.split(/\n/)
 }
