@@ -1,6 +1,7 @@
 const SS = require('stream-stream')
 const Descriptor = require('./lib/descriptor')
 const Joi = require('joi')
+const stream = require('stream')
 
 module.exports = Envie
 Envie.Envie = Envie
@@ -23,14 +24,14 @@ function Envie (description, values) {
     return error ? false : values.hasOwnProperty(key)
   }
 
+  this.helpString = function () {
+    return Object.keys(description)
+      .map((key) => Descriptor.description(key, description[key], values[key]))
+      .join("\n")
+  }
   this.displayHelp = function (target) {
     if (!target) target = process.stderr
-    const result = SS({ separator: '\n' })
-    Object.keys(description)
-      .map((key) => Descriptor.description(key, description[key], values[key]))
-      .forEach((description) => result.write(description))
-    result.end()
-    return result.pipe(target)
+    return contentStream(this.helpString()).pipe(target)
   }
 
   this.validate = () => {
@@ -59,4 +60,10 @@ function Envie (description, values) {
       return Joi.any()
     }
   }
+}
+
+function contentStream(content) {
+  const result = stream.PassThrough()
+  result.end(content)
+  return result
 }
