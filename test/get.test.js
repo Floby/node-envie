@@ -2,7 +2,7 @@ const Joi = require('joi')
 const Envie = require('../')
 const { expect } = require('chai')
 
-describe('new Envie({descriptions...})', () => {
+describe('new Envie({descriptions...}, {...values})', () => {
   const description = {
     with_default: Joi.string().default('hello world'),
     not_defined: Joi.number(),
