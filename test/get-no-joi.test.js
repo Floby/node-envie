@@ -1,7 +1,7 @@
 const Envie = require('../')
 const { expect } = require('chai')
 
-describe('new Envie(desc, values)', () => {
+describe('new Envie({...defaults}, {...values})', () => {
   const envie = Envie({
     described_as_number: 8,
     set_as_not_number: 8,
