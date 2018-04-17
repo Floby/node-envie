@@ -21,6 +21,9 @@
     "Validator"
   ],
   "author": "Florent Jaby <florent.jaby@gmail.com>",
+  "contributors": [
+    "Guillaume Lagorce <guillaume@hey-gul.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Floby/node-envie/issues"
