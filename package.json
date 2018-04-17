@@ -40,8 +40,6 @@
     "stream-sink": "^2.2.2"
   },
   "dependencies": {
-    "colors": "1.1.2",
-    "deep-get-set": "^1.1.0",
-    "stream-stream": "^1.2.6"
+    "colors": "1.1.2"
   }
 }
