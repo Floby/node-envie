@@ -5,6 +5,7 @@ const Joi = require('joi')
 const Envie = require('../')
 const Descriptor = require('../lib/descriptor')
 const { expect } = require('chai')
+require('chai').use(require('sinon-chai'))
 
 describe('new Envie({descriptions...})', () => {
   const description = {
@@ -22,44 +23,43 @@ describe('new Envie({descriptions...})', () => {
   const envie = Envie(description, values)
 
   describe('.displayHelp(writable)', () => {
-    let descriptorMock
+    const helpString = 'Hello World!'
+    let helpStringStub
     beforeEach(() => {
-      descriptorMock = sinon.mock(Descriptor)
+      helpStringStub = sinon.stub(envie, 'helpString')
     })
-    afterEach(() => descriptorMock.restore())
+    afterEach(() => helpStringStub.restore())
 
-    it('calls Descriptor.description() for each entry', () => {
-      Object.keys(description).forEach((key) => {
-        descriptorMock
-          .expects('description')
-          .withArgs(key, description[key], values[key])
-          .callsFake(say('hey'))
-      })
-      return envie.displayHelp(sink()).then(() => {
-        descriptorMock.verify()
-      })
+    beforeEach(() => {
+      helpStringStub.returns(helpString)
     })
 
-    it('concatenates the result of each description in the writable stream', () => {
-      Object.keys(description).forEach((key) => {
-        descriptorMock
-          .expects('description')
-          .withArgs(key)
-          .callsFake(say(`${key}\n`))
+    it('calls self.helpString() and writes the result to the target', () => {
+      return envie.displayHelp(sink()).then((written) => {
+        expect(written).to.equal(helpString)
+        expect(helpStringStub).to.have.been.calledOnce
       })
-      return envie.displayHelp(sink()).then((actual) => {
-        expect(actual).to.equal(
-`with_default
+    })
 
-not_defined
+    describe('when there is no specified target', () => {
+      it('uses process.stderr as default', () => {
+        // Given
+        const testSink = sink()
+        const onPipe = sinon.spy((source) => {
+          source.unpipe(process.stderr)
+          source.pipe(testSink)
+        })
+        process.stderr.once('pipe', onPipe)
 
-to_cast
+        // When
+        const target = envie.displayHelp()
 
-defined
-
-invalid
-`
-        )
+        // Then
+        expect(target).to.equal(process.stderr)
+        return testSink.then((actual) => {
+          expect(actual).to.equal(helpString)
+          expect(onPipe).to.have.been.calledOnce
+        })
       })
     })
   })

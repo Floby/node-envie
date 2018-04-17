@@ -33,6 +33,7 @@
     "joi": "^10.6.0",
     "mocha": "^3.4.2",
     "sinon": "^2.3.6",
+    "sinon-chai": "^3.0.0",
     "stream-sink": "^2.2.2"
   },
   "dependencies": {
