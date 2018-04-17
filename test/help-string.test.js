@@ -1,6 +1,4 @@
 const sinon = require('sinon')
-const sink = require('stream-sink')
-const stream = require('stream')
 const Joi = require('joi')
 const Envie = require('../')
 const Descriptor = require('../lib/descriptor')
@@ -48,7 +46,7 @@ describe('new Envie({descriptions...})', () => {
       })
       const actual = envie.helpString()
       expect(actual).to.equal(
-`with_default
+        `with_default
 
 not_defined
 

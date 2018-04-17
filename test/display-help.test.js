@@ -1,9 +1,7 @@
 const sinon = require('sinon')
 const sink = require('stream-sink')
-const stream = require('stream')
 const Joi = require('joi')
 const Envie = require('../')
-const Descriptor = require('../lib/descriptor')
 const { expect } = require('chai')
 require('chai').use(require('sinon-chai'))
 
@@ -37,7 +35,7 @@ describe('new Envie({descriptions...})', () => {
     it('calls self.helpString() and writes the result to the target', () => {
       return envie.displayHelp(sink()).then((written) => {
         expect(written).to.equal(helpString)
-        expect(helpStringStub).to.have.been.calledOnce
+        expect(helpStringStub).to.have.been.calledOnce()
       })
     })
 
@@ -58,18 +56,9 @@ describe('new Envie({descriptions...})', () => {
         expect(target).to.equal(process.stderr)
         return testSink.then((actual) => {
           expect(actual).to.equal(helpString)
-          expect(onPipe).to.have.been.calledOnce
+          expect(onPipe).to.have.been.calledOnce()
         })
       })
     })
   })
 })
-
-
-function say (content) {
-  return function () {
-    const result = stream.PassThrough()
-    result.end(content)
-    return result
-  }
-}

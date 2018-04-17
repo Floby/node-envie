@@ -1,7 +1,6 @@
-const colors = require('colors')
+require('colors')
 const { expect } = require('chai')
 const Joi = require('joi')
-const sink = require('stream-sink')
 const Descriptor = require('../lib/descriptor')
 
 describe('Descriptor.description(name, validator, value)', () => {
@@ -93,7 +92,7 @@ describe('Descriptor.description(name, validator, value)', () => {
   describe('when there is a value setup', () => {
     const desc = Joi.string().default('World')
     describe('different from the default', () => {
-      const value = "Hello"
+      const value = 'Hello'
       describe('and no description', () => {
         describe('the second line', () => {
           it('contains the overloaded value', () => {
@@ -114,7 +113,7 @@ describe('Descriptor.description(name, validator, value)', () => {
     })
 
     describe('equal to the default', () => {
-      const value = "World"
+      const value = 'World'
       describe('the description', () => {
         it('does not mention it', () => {
           const lines = split(description(name, desc, value))

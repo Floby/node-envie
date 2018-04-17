@@ -20,14 +20,14 @@ function Envie (description, values, options) {
   }
 
   this.has = function (key) {
-    const { error, value } = validate(key)
+    const { error } = validate(key)
     return error ? false : values.hasOwnProperty(key)
   }
 
   this.helpString = function () {
     return Object.keys(description)
       .map((key) => Descriptor.description(key, description[key], values[key]))
-      .join("\n")
+      .join('\n')
   }
   this.displayHelp = function (target) {
     if (!target) target = process.stderr
@@ -62,7 +62,7 @@ function Envie (description, values, options) {
   }
 }
 
-function contentStream(content) {
+function contentStream (content) {
   const result = stream.PassThrough()
   result.end(content)
   return result

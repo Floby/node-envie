@@ -32,4 +32,3 @@ describe('new Envie({descriptions...})', () => {
     })
   })
 })
-

@@ -4,8 +4,17 @@
   "description": "Tiny module to read and document environment configuration",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "istanbul cover --print detail _mocha -- -R spec test",
-    "coveralls": "cat coverage/lcov.info | coveralls"
+    "coveralls": "cat coverage/lcov.info | coveralls",
+    "prepush": "npm run lint && npm run test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -32,10 +41,19 @@
   "devDependencies": {
     "chai": "^4.0.2",
     "coveralls": "^2.13.1",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
     "istanbul": "^0.4.5",
     "joi": "^10.6.0",
+    "lint-staged": "^7.0.4",
     "mocha": "^3.4.2",
-    "sinon": "^2.3.6",
+    "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0",
     "stream-sink": "^2.2.2"
   },

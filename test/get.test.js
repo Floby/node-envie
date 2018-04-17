@@ -52,8 +52,5 @@ describe('new Envie({descriptions...}, {...values})', () => {
         expect(() => envie.get('invalid')).to.throw(/invalid is not valid/i)
       })
     })
-
   })
 })
-
-

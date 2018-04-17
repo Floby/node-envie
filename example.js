@@ -14,5 +14,4 @@ const envie = new Envie({
     .description('Connection string to my postgresql database')
 })
 
-
 envie.displayHelp()
