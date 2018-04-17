@@ -82,6 +82,12 @@ with `PORT=8080` and `LOG_LEVEL="hello world!"`
 
 ```
 
+If you'd rather have the help message as a simple string, you can use:
+
+```javascript
+const help = envier.helpString()
+```
+
 
 Reference
 ---------
