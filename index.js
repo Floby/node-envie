@@ -35,7 +35,10 @@ function Envie (description, values, options) {
   }
 
   this.validate = () => {
-    const { error } = Joi.validate(values, description, { allowUnknown: true })
+    const { error } = Joi.validate(values, description, {
+      allowUnknown: true,
+      abortEarly: false
+    })
     if (!error) {
       return
     }
