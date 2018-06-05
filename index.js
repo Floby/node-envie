@@ -36,7 +36,14 @@ function Envie (description, values, options) {
 
   this.validate = () => {
     const { error } = Joi.validate(values, description, { allowUnknown: true })
-    if (error) throw error
+    if (!error) {
+      return
+    }
+    const detailMessages = error.details.map((detail) => detail.message).join(', ')
+    const errorMessage = `Invalid environment: ${detailMessages}`
+    const validationError = Error(errorMessage)
+    validationError.details = error.details
+    throw validationError
   }
 
   function validate (key) {
