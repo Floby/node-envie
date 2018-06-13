@@ -18,7 +18,7 @@ describe('new Envie({descriptions...})', () => {
     defined: 8,
     invalid: 'hello'
   }
-  const envie = Envie(description, values)
+  const envie = Envie(description, { values })
 
   describe('.displayHelp(writable)', () => {
     const helpString = 'Hello World!'

@@ -9,8 +9,10 @@ describe('new Envie({descriptions...})', () => {
     invalid: Joi.number()
   }
   const envie = Envie(description, {
-    defined: 8,
-    invalid: 'hello'
+    values: {
+      defined: 8,
+      invalid: 'hello'
+    }
   })
   describe('.has(key)', () => {
     describe('when the value is not set up', () => {
