@@ -45,6 +45,29 @@ server.listen(envie.get('PORT'))
 DatabaseService.use(envie.get('DATABASE_URL'))
 ```
 
+Alternative usage
+---
+
+`.values()` validates your environment according to the schema
+
+```javascript
+const Envie = require('envie')
+const Joi = require('joi')
+
+const { PORT } = Envie({
+  PORT: Joi
+    .number()
+    .min(0)
+    .default(0)
+    .description('Port on which the HTTP server will listen'),
+}).values()
+
+server.listen(PORT)
+```
+
+Notes
+---
+
 Undescribed keys can be requested as well but will not be validated.
 
 You can also display a nicely formatted help output with colours
@@ -113,6 +136,10 @@ Returns `true` if the key is properly configured.
 #### `envie.validate()`
 
 Throws if any validator failed.
+
+#### `envie.values()`
+
+Validates env and returns values as an object.
 
 #### `envie.displayHelp([stream=process.stderr])`
 
