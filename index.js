@@ -1,5 +1,5 @@
 const Descriptor = require('./lib/descriptor')
-const Joi = require('joi')
+const Joi = require('./joi')
 const stream = require('stream')
 
 module.exports = Envie
