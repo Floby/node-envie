@@ -8,7 +8,7 @@ module.exports = Joi
 
 function attemptRequire (name) {
   try {
-    return require('joi')
+    return require(name)
   } catch (e) {
     return null
   }
