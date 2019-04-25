@@ -18,7 +18,7 @@ Usage
 
 ```javascript
 const Envie = require('envie')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 const envie = Envie({
   PORT: Joi
@@ -52,7 +52,7 @@ Alternative usage
 
 ```javascript
 const Envie = require('envie')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 
 const { PORT } = Envie({
   PORT: Joi

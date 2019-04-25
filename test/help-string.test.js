@@ -1,5 +1,5 @@
 const sinon = require('sinon')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const Envie = require('../')
 const Descriptor = require('../lib/descriptor')
 const { expect } = require('chai')

@@ -1,6 +1,6 @@
 require('colors')
 const { expect } = require('chai')
-const Joi = require('joi')
+const Joi = require('@hapi/joi')
 const Descriptor = require('../lib/descriptor')
 
 describe('Descriptor.description(name, validator, value)', () => {
