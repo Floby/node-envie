@@ -1,6 +1,6 @@
 {
   "name": "envie",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Tiny module to read and document environment configuration",
   "main": "index.js",
   "scripts": {
