@@ -17,8 +17,7 @@ Usage
 -----
 
 ```javascript
-const Envie = require('envie')
-const Joi = require('@hapi/joi')
+const { Envie, Joi } = require('envie')
 
 const envie = Envie({
   PORT: Joi
@@ -51,8 +50,7 @@ Alternative usage
 `.values()` validates your environment according to the schema
 
 ```javascript
-const Envie = require('envie')
-const Joi = require('@hapi/joi')
+const { Envie, Joi } = require('envie')
 
 const { PORT } = Envie({
   PORT: Joi
@@ -165,7 +163,7 @@ License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017 Florent Jaby
+Copyright (c) 2019 Florent Jaby
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
