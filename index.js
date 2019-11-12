@@ -39,7 +39,8 @@ function Envie (description, values, options) {
   }
 
   this.values = () => {
-    const { error, value } = Joi.validate(values, description, {
+    const globalDescription = Joi.compile(description)
+    const { error, value } = globalDescription.validate(values, {
       allowUnknown: true,
       abortEarly: false
     })
@@ -59,7 +60,7 @@ function Envie (description, values, options) {
 
   function getValidator (key) {
     const keyDescription = description[key]
-    if (keyDescription && keyDescription.isJoi) {
+    if (Joi.isSchema(keyDescription)) {
       return keyDescription
     }
     const keyValue = keyDescription
