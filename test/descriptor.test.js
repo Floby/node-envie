@@ -78,7 +78,7 @@ describe('Descriptor.description(name, validator, value)', () => {
         })
       })
       context('when there are many schemes', () => {
-        const desc = Joi.string().uri({ scheme: ['http', 'https'] }).uri({ scheme: 'ftp' })
+        const desc = Joi.string().uri({ scheme: ['http', 'https', 'ftp'] })
         describe('the first line', () => {
           it('contains the name, type and declinations with colours', () => {
             const lines = split(description(name, desc))
