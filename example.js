@@ -11,6 +11,7 @@ const envie = new Envie({
   MY_URL: Joi
     .string()
     .uri({ scheme: 'postgres' })
+    .example('postgres://hello:world@test.com/database')
     .description('Connection string to my postgresql database')
 })
 

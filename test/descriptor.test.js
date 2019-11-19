@@ -36,6 +36,18 @@ describe('Descriptor.description(name, validator, value)', () => {
           expect(lines[1]).to.equal(`    ${text}`)
         })
       })
+
+      describe('and an example', () => {
+        const example = 'Some text'
+        const desc = Joi.any().description(text).example(example)
+        describe('the third line', () => {
+          it('contains the example', () => {
+            const expected = `(e.g. ${example})`.gray
+            const lines = split(description(name, desc))
+            expect(lines[2]).to.equal(`    ${expected}`)
+          })
+        })
+      })
     })
   })
 
