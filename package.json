@@ -62,7 +62,7 @@
     "stream-sink": "^2.2.2"
   },
   "peerDependencies": {
-    "@hapi/joi": ">=13.4.0"
+    "@hapi/joi": ">=13.4.0 <16"
   },
   "dependencies": {
     "colors": "^1.3.3"
