@@ -3,6 +3,7 @@
   "version": "3.0.2",
   "description": "Tiny module to read and document environment configuration",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "lint": "eslint .",
     "test": "nyc -r text -r html -r lcov mocha -R spec test",
