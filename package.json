@@ -43,7 +43,6 @@
   },
   "homepage": "https://github.com/Floby/node-envie#readme",
   "devDependencies": {
-    "@hapi/joi": "^16.0.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
     "dirty-chai": "^2.0.1",
@@ -62,7 +61,7 @@
     "stream-sink": "^2.2.2"
   },
   "dependencies": {
-    "@hapi/joi": "^16.0.0",
-    "colors": "^1.3.3"
+    "colors": "^1.3.3",
+    "joi": "^17.3.0"
   }
 }

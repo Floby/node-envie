@@ -1,6 +1,6 @@
 const sinon = require('sinon')
 const sink = require('stream-sink')
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 const Envie = require('../')
 const { expect } = require('chai')
 require('chai').use(require('sinon-chai'))

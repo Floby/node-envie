@@ -1,5 +1,5 @@
 const Envie = require('../')
-const Joi = require('@hapi/joi')
+const Joi = require('joi')
 const { expect } = require('chai')
 
 describe('Envie', () => {
