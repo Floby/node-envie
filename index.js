@@ -6,10 +6,12 @@ module.exports = Envie
 Envie.Envie = Envie
 Envie.Joi = Joi
 
-function Envie (description, values, options) {
-  if (!(this instanceof Envie)) return new Envie(description, values, options)
-  if (!values) values = process.env
-  if (!options) options = { noDefaults: false }
+function Envie (description, options = {}) {
+  if (!(this instanceof Envie)) return new Envie(description, options)
+  const {
+    values = process.env,
+    noDefaults = false
+  } = options
 
   this.get = function (key) {
     const { error, value } = validate(key)
@@ -55,7 +57,7 @@ function Envie (description, values, options) {
   }
 
   function validate (key) {
-    return getValidator(key).validate(values[key], { noDefaults: options.noDefaults })
+    return getValidator(key).validate(values[key], { noDefaults })
   }
 
   function getValidator (key) {

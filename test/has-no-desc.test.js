@@ -3,7 +3,7 @@ const { expect } = require('chai')
 
 describe('new Envie({}, {})', () => {
   const envie = Envie({}, {
-    defined: 8
+    values: { defined: 8 }
   })
   describe('.has(key)', () => {
     describe('when the key is not set up', () => {

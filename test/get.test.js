@@ -11,9 +11,11 @@ describe('new Envie({descriptions...}, {...values})', () => {
     invalid: Joi.number()
   }
   const envie = Envie(description, {
-    to_cast: '8',
-    defined: 8,
-    invalid: 'hello'
+    values: {
+      to_cast: '8',
+      defined: 8,
+      invalid: 'hello'
+    }
   })
   describe('.get(key)', () => {
     describe('when the value is not set up', () => {
@@ -27,7 +29,10 @@ describe('new Envie({descriptions...}, {...values})', () => {
         })
 
         describe('but noDefaults option is true', () => {
-          const envie = Envie(description, {}, { noDefaults: true })
+          const envie = Envie(description, {
+            values: {},
+            noDefaults: true
+          })
           it('returns undefined', () => {
             expect(envie.get('with_default')).to.equal(undefined)
           })

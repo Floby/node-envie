@@ -12,10 +12,12 @@ describe('new Envie({...defaults}, {...values})', () => {
     described_as_long_string: 'my symbol',
     set_as_long_string: 'my symbol'
   }, {
-    set_as_not_number: 'hello',
-    set_as_not_boolean: 'hello',
-    set_as_not_short_string: 8,
-    set_as_not_long_string: 42
+    values: {
+      set_as_not_number: 'hello',
+      set_as_not_boolean: 'hello',
+      set_as_not_short_string: 8,
+      set_as_not_long_string: 42
+    }
   })
   describe('.get(key)', () => {
     context('when the desc is only a number', () => {
