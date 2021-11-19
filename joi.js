@@ -1,4 +1,4 @@
-const Joi = attemptRequire('@hapi/joi') || attemptRequire('joi')
+const Joi = attemptRequire()
 
 if (!Joi) {
   throw Error('module `envie` could not load `joi`. Please make sure it is installed as a peer dependency')
@@ -6,9 +6,9 @@ if (!Joi) {
 
 module.exports = Joi
 
-function attemptRequire (name) {
+function attemptRequire () {
   try {
-    return require(name)
+    return require('joi')
   } catch (e) {
     return null
   }
