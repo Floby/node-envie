@@ -146,11 +146,11 @@ describe('Descriptor.description(name, validator, value)', () => {
 
     describe('invalid', () => {
       const desc = Joi.number()
-      let value = 'hello'
+      const value = 'hello'
       describe('the value line', () => {
         it('explains the validation error', () => {
           const lines = split(description(name, desc, value))
-          expect(lines[1]).to.equal(`    overwritten: ` + `invalid! "${name}" must be a number`.red)
+          expect(lines[1]).to.equal('    overwritten: ' + `invalid! "${name}" must be a number`.red)
         })
       })
     })

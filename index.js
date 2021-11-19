@@ -21,7 +21,7 @@ function Envie (description, values, options) {
 
   this.has = function (key) {
     const { error } = validate(key)
-    return error ? false : values.hasOwnProperty(key)
+    return error ? false : Object.prototype.hasOwnProperty.call(values, key)
   }
 
   this.helpString = function () {
