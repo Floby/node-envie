@@ -63,7 +63,7 @@ const { PORT } = Envie({
 server.listen(PORT)
 ```
 
-Keep in mind that this "freezes" the returned values where as `envie.get(key)` gets
+Keep in mind that this "freezes" the returned values whereas `envie.get(key)` gets
 the current value every time. This may cause some issues when mutating `process.env`
 for testing purposes.
 
